@@ -1,5 +1,9 @@
 package main
 
+/**
+func (dc *Context) DrawLine(x1, y1, x2, y2 float64)
+*/
+
 import (
 	"github.com/fogleman/gg"
 )
