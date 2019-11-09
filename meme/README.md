@@ -1,0 +1,85 @@
+# meme
+
+![](./out.png)
+
+```go
+package main
+
+import (
+	"github.com/fogleman/gg"
+)
+
+func main() {
+	const S = 1024
+
+	dc := gg.NewContext(S, S)
+	dc.SetRGB(1, 1, 1)
+	dc.Clear()
+	if err := dc.LoadFontFace("/Library/Fonts/Arial Unicode.ttf", 80); err != nil {
+		panic(err)
+	}
+
+	dc.SetRGB(0, 0, 0)
+	s := "ONE DOES NOT SIMPLY"
+	n := 6 //stroke size
+	//[-6, 6]
+	for dy := -n; dy <= n; dy++ {
+		//[-6, 6]
+		for dx := -n; dx <= n; dx++ {
+			// out.png1 is the result commented the below if condition
+			if dx*dx+dy*dy >= n*n {
+				//give it rounded corners
+				continue
+			}
+			x := S/2 + float64(dx)
+			y := S/2 + float64(dy)
+			dc.DrawStringAnchored(s, x, y, 0.5, 0.5)
+		}
+	}
+	dc.SetRGB(1, 1, 1)
+	dc.DrawStringAnchored(s, S/2, S/2, 0.5, 0.5)
+	dc.SavePNG("out.png")
+}
+```
+
+![](./out1.png)
+
+```go
+package main
+
+import (
+	"github.com/fogleman/gg"
+)
+
+func main() {
+	const S = 1024
+
+	dc := gg.NewContext(S, S)
+	dc.SetRGB(1, 1, 1)
+	dc.Clear()
+	if err := dc.LoadFontFace("/Library/Fonts/Arial Unicode.ttf", 80); err != nil {
+		panic(err)
+	}
+
+	dc.SetRGB(0, 0, 0)
+	s := "ONE DOES NOT SIMPLY"
+	n := 6 //stroke size
+	//[-6, 6]
+	for dy := -n; dy <= n; dy++ {
+		//[-6, 6]
+		for dx := -n; dx <= n; dx++ {
+			// out.png1 is the result commented the below if condition
+			// if dx*dx+dy*dy >= n*n {
+			// 	//give it rounded corners
+			// 	continue
+			// }
+			x := S/2 + float64(dx)
+			y := S/2 + float64(dy)
+			dc.DrawStringAnchored(s, x, y, 0.5, 0.5)
+		}
+	}
+	dc.SetRGB(1, 1, 1)
+	dc.DrawStringAnchored(s, S/2, S/2, 0.5, 0.5)
+	dc.SavePNG("out.png")
+}
+```
